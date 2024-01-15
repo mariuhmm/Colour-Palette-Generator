@@ -1,0 +1,77 @@
+body {
+  font-family: 'Lexend Deca', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.header-container h1 {
+  animation-duration: 2s;
+  animation-name: slideup;
+}
+
+.small-msg h5 {
+  animation-duration: 2s;
+  animation-name: downslide;
+}
+
+@keyframes slideup {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes downslide {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-container {
+  margin-bottom: 20px;
+}
+
+.color-palette {
+  display: flex;
+}
+
+.color-box {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.color-box:hover {
+  transform: scale(1.1);
+}
+
+.color-code {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  color: #ffffff;
+}
+
+.color-box:hover .color-code {
+  display: block;
+}
