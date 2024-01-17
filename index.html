@@ -1,24 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Colour Palette Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+// function for generating a random colour code
+function generateRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
-<div class="header-container">
-  <h1>Press space to generate a colour palette</h1>
-</div>
+// function for generating a palette to be displayed in HTML
+function generatePalette() {
+  const colorPalette = document.getElementById('colorPalette');
+  colorPalette.innerHTML = '';
 
-<div id="colorPalette" class="color-palette"></div>
-<div class="small-msg">
-  <h5>Click the colour to copy.</h5>
-</div>
+  // generate and display 5 colours
+  for (let i = 0; i < 5; i++) {
+    const colorBox = document.createElement('div');
+    colorBox.classList.add('color-box');
+    const color = generateRandomColor();
+    colorBox.style.backgroundColor = color;
 
-<script src="palette.js"></script>
+    // display the hex colour code
+    const colorCodeElement = document.createElement('div');
+    colorCodeElement.classList.add('color-code');
+    colorCodeElement.textContent = color;
+    colorBox.appendChild(colorCodeElement);
 
-</body>
-</html>
+    // event listener to copy colour code to clipboard
+    colorBox.addEventListener('click', function() {
+      copyToClipboard(color);
+    });
+
+    colorPalette.appendChild(colorBox);
+  }
+}
+
+// event listener to generate a random palette whenever space is pressed
+document.addEventListener('keydown', function (event) {
+  if (event.code === 'Space') {
+    generatePalette();
+  }
+});
+
+// function for copying text to clipboard
+function copyToClipboard(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+}
+// generate the first palette
+generatePalette();
